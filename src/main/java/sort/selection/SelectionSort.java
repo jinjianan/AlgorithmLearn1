@@ -22,6 +22,19 @@ public class SelectionSort {
         }
     }
 
+    public static <E extends Comparable<E>> void sort2(E[] data){
+        for (int i = data.length-1 ;i >= 0; i--) {
+            int maxIndex = i;
+            for (int j = i; j >= 0 ; j--) {
+                if (data[j].compareTo(data[maxIndex])>0)
+                    maxIndex = j;
+            }
+            E temp = data[i];
+            data[i] = data[maxIndex];
+            data[maxIndex] = temp;
+        }
+    }
+
     public static void main(String[] args) {
 
 //        Integer[] data = {66, 1, 32, 45, 5};

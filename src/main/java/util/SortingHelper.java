@@ -25,8 +25,12 @@ public class SortingHelper {
 
     public static <E extends Comparable<E>> void sortTest(String sortName, E[] data) {
         long start = System.nanoTime();
-        if (sortName.equals(SELECT_SORT))
+        if (sortName.equals(SELECT_SORT)) {
+            //实现方式1
             SelectionSort.sort(data);
+            //实现方式2
+//            SelectionSort.sort2(data);
+        }
         long end = System.nanoTime();
         boolean resultCheck = SortingHelper.isSorted(data);
         double time = (end - start) / 1000000000.0;
