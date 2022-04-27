@@ -1,0 +1,37 @@
+package util;
+
+import sort.selection.SelectionSort;
+
+public class SortingHelper {
+    public static final String SELECT_SORT = "SelectSort";
+
+    private SortingHelper() {
+    }
+
+    /**
+     * 检测选择排序结果是否正确
+     *
+     * @param data
+     * @param <E>
+     * @return true 正确  ; false 不正确
+     */
+    public static <E extends Comparable<E>> boolean isSorted(E[] data) {
+        for (int i = 0; i < data.length - 1; i++) {
+            if (data[i].compareTo(data[i + 1]) > 0)
+                return false;
+        }
+        return true;
+    }
+
+    public static <E extends Comparable<E>> void sortTest(String sortName, E[] data) {
+        long start = System.nanoTime();
+        if (sortName.equals(SELECT_SORT))
+            SelectionSort.sort(data);
+        long end = System.nanoTime();
+        boolean resultCheck = SortingHelper.isSorted(data);
+        double time = (end - start) / 1000000000.0;
+        String describe = String.format("%s ,size [%d] ,result [%b], time [%f s]", sortName,data.length, resultCheck, time);
+        System.out.println(describe);
+    }
+
+}
