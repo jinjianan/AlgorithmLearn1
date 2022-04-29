@@ -1,9 +1,13 @@
 package util;
 
+import sort.insert.InsertionSort;
 import sort.selection.SelectionSort;
 
 public class SortingHelper {
     public static final String SELECT_SORT = "SelectSort";
+    public static final String INSERTION_SORT = "InsertionSort";
+    public static final String INSERTION_SORT_2 = "InsertionSort2";
+    public static final String INSERTION_SORT_3 = "InsertionSort3";
 
     private SortingHelper() {
     }
@@ -30,6 +34,15 @@ public class SortingHelper {
             SelectionSort.sort(data);
             //实现方式2
 //            SelectionSort.sort2(data);
+        }
+        else if (sortName.equals(INSERTION_SORT)){
+            InsertionSort.sort(data);
+        }
+        else if (sortName.equals(INSERTION_SORT_2)){
+            InsertionSort.sort2(data);
+        }
+        else if (sortName.equals(INSERTION_SORT_3)){
+            InsertionSort.sort3(data);
         }
         long end = System.nanoTime();
         boolean resultCheck = SortingHelper.isSorted(data);
