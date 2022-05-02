@@ -1,21 +1,35 @@
 package queueLearn;
 
+import java.util.Random;
+
 public class Main {
 
     public static void main(String[] args) {
-        ArrayQueue<Integer> queue = new ArrayQueue<>();
-        for (int i = 0; i < 10; i++) {
-            queue.enqueue(i);
-        }
-        System.out.println(queue);
-        queue.enqueue(32);
-        queue.enqueue(32);
-        queue.enqueue(32);
+        int opCount = 100000;
 
-        queue.dequeue();
-        System.out.println(queue);
-        System.out.println(queue.getFront());
-        System.out.println(queue);
+        ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
+        double time1 = testQueue(arrayQueue,opCount);
+        System.out.println("ArrayQueue Time : " + time1 + " s");
+
+        LoopQueue<Integer> loopQueue = new LoopQueue<>();
+        double time2 = testQueue(loopQueue,opCount);
+        System.out.println("LoopQueue Time : " + time2 + " s");
     }
+
+
+    private static double testQueue(Queue<Integer> q,int opCount){
+        long startTime = System.nanoTime();
+        Random r = new Random();
+        for (int i = 0; i < opCount; i++) {
+            q.enqueue(r.nextInt(Integer.MAX_VALUE));
+        }
+        for (int i = 0; i < opCount; i++) {
+            q.dequeue();
+        }
+        long endTime = System.nanoTime();
+        return (endTime-startTime) / 1000000000.0;
+    }
+
+
 
 }
