@@ -30,7 +30,7 @@ public class Array<T> {
         return size == 0;
     }
 
-    private void resize(int capacity){
+    private void resize(int capacity) {
         Object[] newData = new Object[capacity];
         for (int i = 0; i < size; i++) {
             newData[i] = data[i];
@@ -44,7 +44,7 @@ public class Array<T> {
             throw new IllegalArgumentException("index illegal");
 
         if (size == data.length)
-            resize( data.length * 2);
+            resize(data.length * 2);
 
 //        if (size - index >= 0) System.arraycopy(data, index, data, index + 1, size - index);
         for (int i = size; i > index; i--) {
@@ -73,11 +73,11 @@ public class Array<T> {
         return element(data[index]);
     }
 
-    public T getLast(){
-        return get(size-1);
+    public T getLast() {
+        return get(size - 1);
     }
 
-    public T getFirst(){
+    public T getFirst() {
         return get(0);
     }
 
@@ -107,8 +107,8 @@ public class Array<T> {
         }
         size--;
         data[size] = null;
-        if ( size == data.length / 4 && data.length / 2 != 0)
-                resize( data.length / 2);
+        if (size == data.length / 4 && data.length / 2 != 0)
+            resize(data.length / 2);
         return t;
     }
 
@@ -120,9 +120,9 @@ public class Array<T> {
         return remove(size - 1);
     }
 
-    public void removeElement(T t){
+    public void removeElement(T t) {
         int index = indexOf(t);
-        if (index != -1)remove(index);
+        if (index != -1) remove(index);
     }
 
 
