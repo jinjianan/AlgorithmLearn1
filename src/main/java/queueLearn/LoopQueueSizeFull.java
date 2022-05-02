@@ -1,6 +1,6 @@
 package queueLearn;
 
-public class LoopQueue<T> implements Queue<T> {
+public class LoopQueueSizeFull<T> implements Queue<T> {
 
     private Object[] data;
     private int front;
@@ -10,14 +10,14 @@ public class LoopQueue<T> implements Queue<T> {
 
     private static final int MIN_CAPACITY = 5;
 
-    public LoopQueue(int newCapacity) {
+    public LoopQueueSizeFull(int newCapacity) {
         capacity = Math.max(newCapacity, MIN_CAPACITY);
-        data = new Object[capacity + 1];
+        data = new Object[capacity];
         front = tail = 0;
         size = 0;
     }
 
-    public LoopQueue() {
+    public LoopQueueSizeFull() {
         this(MIN_CAPACITY);
     }
 
@@ -30,17 +30,12 @@ public class LoopQueue<T> implements Queue<T> {
         return size;
     }
 
-    public int calSize() {
-        if (tail>front) return tail-front;
-        else return tail+data.length-front;
-    }
-
     public int capacity() {
         return capacity;
     }
 
     private void resize(int newCapacity) {
-        Object[] newData = new Object[newCapacity + 1];
+        Object[] newData = new Object[newCapacity];
         for (int i = 0; i < size; i++) {
             newData[i] = data[(front + i) % data.length];
         }
@@ -65,7 +60,7 @@ public class LoopQueue<T> implements Queue<T> {
             throw new IllegalArgumentException("队列空");
         T t = element(data[front]);
         data[front] = null;
-        front =  (front + 1) % data.length;;
+        front =  (front + 1) % data.length;
         size--;
         if (size == capacity / 4 && capacity / 2 >= MIN_CAPACITY) resize(capacity / 2);
         return t;
@@ -85,11 +80,10 @@ public class LoopQueue<T> implements Queue<T> {
 
     @Override
     public boolean isEmpty() {
-        return tail - front == 0;
+        return size == 0;
     }
 
     private boolean isFull() {
-//        return (tail + 1)% capacity == front;
         return size == capacity;
     }
 
@@ -109,15 +103,15 @@ public class LoopQueue<T> implements Queue<T> {
 
     public static void main(String[] args) {
 //        ArrayQueue<Integer> queue = new ArrayQueue<>();
-        LoopQueue<Integer> queue = new LoopQueue<>(10);
+        LoopQueueSizeFull<Integer> queue = new LoopQueueSizeFull<>(10);
         for (int i = 0; i < 10; i++) {
             queue.enqueue(i);
             System.out.println(queue);
 
-/*            if (i%3==2){
+            if (i%3==2){
                 queue.dequeue();
                 System.out.println(queue);
-            }*/
+            }
         }
         System.out.println();
     }
