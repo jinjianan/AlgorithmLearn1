@@ -1,5 +1,7 @@
 package queueLearn;
 
+import linkedListLearn.LinkedListQueue;
+
 import java.util.Random;
 
 public class Main {
@@ -14,6 +16,10 @@ public class Main {
         LoopQueue<Integer> loopQueue = new LoopQueue<>();
         double time2 = testQueue(loopQueue,opCount);
         System.out.println("LoopQueue Time : " + time2 + " s");
+
+        LinkedListQueue<Integer> linkedListQueue = new LinkedListQueue<>();
+        double time3 = testQueue(loopQueue,opCount);
+        System.out.println("LinkedListQueue Time : " + time3 + " s");
     }
 
 
