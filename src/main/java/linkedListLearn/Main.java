@@ -5,7 +5,9 @@ import linkedListLearn.LinkedList;
 public class Main {
 
     public static void main(String[] args) {
-        LinkedList<Integer> linkedList = new LinkedList<>();
+//        LinkedList<Integer> linkedList = new LinkedList<>();
+//        LinkedListWork<Integer> linkedList = new LinkedListWork<>();
+        LinkedListWork1<Integer> linkedList = new LinkedListWork1<>();
 
         for (int i = 0; i < 5; i++) {
             linkedList.addFirst(i);
