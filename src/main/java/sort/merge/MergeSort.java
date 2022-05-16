@@ -19,6 +19,13 @@ public class MergeSort<T> {
         sortRecursionDesc(arr, 0, arr.length - 1, 1);
     }
 
+    /**
+     * 归并排序迭代方法
+     * @param arr
+     * @param l
+     * @param r
+     * @param <T>
+     */
     private static <T extends Comparable<T>> void sortRecursion(T[] arr, int l, int r) {
         if (r - l == 0) return;
         int mid = (r + l) / 2;
@@ -27,6 +34,13 @@ public class MergeSort<T> {
         merge(arr, l, mid, r);
     }
 
+    /**
+     * 归并排序迭代方法 + depth调试
+     * @param arr
+     * @param l
+     * @param r
+     * @param <T>
+     */
     private static <T extends Comparable<T>> void sortRecursionDesc(T[] arr, int l, int r, int depth) {
         int label =  new Random().nextInt(10);
         System.out.print(generateDepthText(depth) + "LABEL->" +label);
