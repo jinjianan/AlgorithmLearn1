@@ -1,6 +1,7 @@
 package util;
 
 import sort.insert.InsertionSort;
+import sort.merge.MergeSort;
 import sort.selection.SelectionSort;
 
 public class SortingHelper {
@@ -8,6 +9,8 @@ public class SortingHelper {
     public static final String INSERTION_SORT = "InsertionSort";
     public static final String INSERTION_SORT_2 = "InsertionSort2";
     public static final String INSERTION_SORT_3 = "InsertionSort3";
+
+    public static final String MERGE_SORT = "MergeSort";
 
     private SortingHelper() {
     }
@@ -43,6 +46,9 @@ public class SortingHelper {
         }
         else if (sortName.equals(INSERTION_SORT_3)){
             InsertionSort.sort3(data);
+        }
+        else if (sortName.equals(MERGE_SORT)){
+            MergeSort.sort(data);
         }
         long end = System.nanoTime();
         boolean resultCheck = SortingHelper.isSorted(data);

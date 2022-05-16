@@ -50,7 +50,7 @@ public class SelectionSort {
 //        }
 
 //        int[] size = {1000000,10000000,100000000};
-        int[] size = {10000,100000};
+        int[] size = {10000};
         for (int s : size) {
             Integer[] arr = ArrayGenerator.generatorRandomArray(s,s);
 //            System.out.println(Arrays.asList(arr));
