@@ -11,6 +11,7 @@ public class SortingHelper {
     public static final String INSERTION_SORT_3 = "InsertionSort3";
 
     public static final String MERGE_SORT = "MergeSort";
+    public static final String MERGE_SORT2 = "MergeSort2";
 
     private SortingHelper() {
     }
@@ -49,6 +50,9 @@ public class SortingHelper {
         }
         else if (sortName.equals(MERGE_SORT)){
             MergeSort.sort(data);
+        }
+        else if (sortName.equals(MERGE_SORT2)){
+            MergeSort.sort2(data);
         }
         long end = System.nanoTime();
         boolean resultCheck = SortingHelper.isSorted(data);
