@@ -8,8 +8,7 @@ import util.SortingHelper;
 import java.util.Arrays;
 import java.util.Random;
 
-import static util.SortingHelper.MERGE_SORT;
-import static util.SortingHelper.MERGE_SORT2;
+import static util.SortingHelper.*;
 
 public class MergeSort<T> {
 
@@ -18,7 +17,7 @@ public class MergeSort<T> {
 
     public static <T extends Comparable<T>> void sort(T[] arr) {
         T[] temp = Arrays.copyOf(arr, arr.length);
-        sortRecursion(arr, 0, arr.length - 1,temp);
+        sortRecursion(arr, 0, arr.length - 1, temp);
 //        sortRecursionDesc(arr, 0, arr.length - 1, 1);
     }
 
@@ -30,13 +29,13 @@ public class MergeSort<T> {
      * @param r
      * @param <T>
      */
-    private static <T extends Comparable<T>> void sortRecursion(T[] arr, int l, int r,T[] temp) {
+    private static <T extends Comparable<T>> void sortRecursion(T[] arr, int l, int r, T[] temp) {
         if (r - l == 0) return;
         int mid = (r + l) / 2;
-        sortRecursion(arr, l, mid,temp);
-        sortRecursion(arr, mid + 1, r,temp);
+        sortRecursion(arr, l, mid, temp);
+        sortRecursion(arr, mid + 1, r, temp);
         if (arr[mid].compareTo(arr[mid + 1]) > 0)
-            merge(arr, l, mid, r,temp);
+            merge(arr, l, mid, r, temp);
     }
 
     public static <T extends Comparable<T>> void sort2(T[] arr) {
@@ -87,6 +86,7 @@ public class MergeSort<T> {
         res.append("----".repeat(Math.max(0, depth)));
         return res.toString();
     }
+
     private static <T extends Comparable<T>> void merge(T[] arr, int l, int mid, int r, T[] temp) {
         System.arraycopy(arr, l, temp, l, r - l + 1);
         int j = l;
@@ -107,7 +107,8 @@ public class MergeSort<T> {
             }
         }
     }
-    private static <T extends Comparable<T>> void   merge(T[] arr, int l, int mid, int r) {
+
+    private static <T extends Comparable<T>> void merge(T[] arr, int l, int mid, int r) {
         int j = l;
         int k = mid + 1;
         T[] temp = Arrays.copyOfRange(arr, l, r + 1);
@@ -128,15 +129,40 @@ public class MergeSort<T> {
         }
     }
 
+    public static <T extends Comparable<T>> void sort3(T[] arr) {
+        sortBU(arr);
+    }
+
+    /**
+     * 归并排序迭代方法
+     *
+     * @param arr
+     * @param <T>
+     */
+    private static <T extends Comparable<T>> void sortBU(T[] arr) {
+        T[] temp = Arrays.copyOf(arr, arr.length);
+
+        int n = arr.length;
+        for (int size = 1; size < n; size += size) {
+            int s, l;
+            for (s = 0, l = s + size * 2 - 1; s + size < n; s = l + 1, l = s + size * 2 - 1) {
+                if (arr[s + size - 1].compareTo(arr[s + size]) > 0) {
+                    merge(arr, s, s + size - 1, Math.min(l, n - 1), temp);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
-        int[] size = {5000000};
+        int[] size = {1103213};
         for (int s : size) {
             Integer[] arr = ArrayGenerator.generatorRandomArray(s, s);
 //            Integer[] arr = ArrayGenerator.generatorSimpleLinearArray(s);
             Integer[] arr1 = Arrays.copyOf(arr, arr.length);
-            SortingHelper.sortTest(MERGE_SORT, arr);
-            SortingHelper.sortTest(MERGE_SORT2, arr1);
+//            SortingHelper.sortTest(MERGE_SORT, arr);
+//            SortingHelper.sortTest(MERGE_SORT2, arr1);
+            SortingHelper.sortTest(MERGE_SORT3, arr1);
         }
     }
 }
