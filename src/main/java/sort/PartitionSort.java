@@ -67,6 +67,35 @@ public class PartitionSort {
 
     }
 
+    public static <T extends Comparable<T>> void sort3(T[] arr) {
+        partitionRecursion3(arr, 0, arr.length - 1);
+    }
+
+    public static <T extends Comparable<T>> void partitionRecursion3(T[] arr, int l, int r) {
+        if (r <= l) return;
+        int i = l + 1;
+        int lt = l;
+        int gt = r + 1;
+        swap(arr, l, l + new Random().nextInt(r - l + 1));
+        while (i < gt) {
+            if (arr[l].compareTo(arr[i]) > 0) {
+                lt++;
+                if (lt != i)swap(arr,lt,i);
+                i++;
+            } else if (arr[l].compareTo(arr[i]) < 0) {
+                gt--;
+                swap(arr, i, gt);
+            } else {
+                i++;
+            }
+        }
+
+        swap(arr, l, lt);
+        partitionRecursion3(arr, l, lt - 1);
+        partitionRecursion3(arr, gt, r);
+
+    }
+
     public static <T extends Comparable<T>> void swap(T[] arr, int a, int b) {
         T temp = arr[a];
         arr[a] = arr[b];
@@ -77,20 +106,23 @@ public class PartitionSort {
 
         int[] size = {100000};
         for (int s : size) {
-            Integer[] arr = ArrayGenerator.generatorRandomArray(s, s);
-            Integer[] arr2 = Arrays.copyOf(arr, arr.length);
-            SortingHelper.sortTest(PARTITION_SORT, arr);
-            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
-
-            arr = ArrayGenerator.generatorSimpleLinearArray(s);
-            arr2 = Arrays.copyOf(arr, arr.length);
-            SortingHelper.sortTest(PARTITION_SORT, arr);
-            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
-
-            arr = ArrayGenerator.generatorRandomArray(s, 1);
-            arr2 = Arrays.copyOf(arr, arr.length);
+            Integer[] arr;
+//            Integer[] arr2 = Arrays.copyOf(arr, arr.length);
 //            SortingHelper.sortTest(PARTITION_SORT, arr);
-            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+//            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+//
+//            arr = ArrayGenerator.generatorSimpleLinearArray(s);
+//            arr2 = Arrays.copyOf(arr, arr.length);
+//            SortingHelper.sortTest(PARTITION_SORT, arr);
+//            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+//
+//            arr = ArrayGenerator.generatorRandomArray(s, 1);
+//            arr2 = Arrays.copyOf(arr, arr.length);
+////            SortingHelper.sortTest(PARTITION_SORT, arr);
+//            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+
+            arr = ArrayGenerator.generatorRandomArray(s, s);
+            SortingHelper.sortTest(PARTITION_THREE_SORT, arr);
 
         }
     }
