@@ -1,5 +1,6 @@
 package util;
 
+import sort.PartitionSort;
 import sort.insert.InsertionSort;
 import sort.merge.MergeSort;
 import sort.selection.SelectionSort;
@@ -13,6 +14,7 @@ public class SortingHelper {
     public static final String MERGE_SORT = "MergeSort";
     public static final String MERGE_SORT2 = "MergeSort2";
     public static final String MERGE_SORT3 = "MergeSort3";
+    public static final String PARTITION_SORT = "Partition";
 
     private SortingHelper() {
     }
@@ -57,6 +59,8 @@ public class SortingHelper {
         }
         else if (sortName.equals(MERGE_SORT3)){
             MergeSort.sort3(data);
+        }else if (sortName.equals(PARTITION_SORT)){
+            PartitionSort.sort(data);
         }
         long end = System.nanoTime();
         boolean resultCheck = SortingHelper.isSorted(data);
