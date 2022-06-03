@@ -15,6 +15,7 @@ public class SortingHelper {
     public static final String MERGE_SORT2 = "MergeSort2";
     public static final String MERGE_SORT3 = "MergeSort3";
     public static final String PARTITION_SORT = "Partition";
+    public static final String PARTITION_DOUBLE_SORT = "DoublePartition";
 
     private SortingHelper() {
     }
@@ -61,6 +62,8 @@ public class SortingHelper {
             MergeSort.sort3(data);
         }else if (sortName.equals(PARTITION_SORT)){
             PartitionSort.sort(data);
+        }else if (sortName.equals(PARTITION_DOUBLE_SORT)){
+            PartitionSort.sort2(data);
         }
         long end = System.nanoTime();
         boolean resultCheck = SortingHelper.isSorted(data);

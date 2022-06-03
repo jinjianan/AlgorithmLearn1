@@ -1,9 +1,12 @@
 package sort;
 
+import sort.insert.InsertionSort;
+import sort.selection.SelectionSort;
 import util.ArrayGenerator;
 import util.SortingHelper;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static util.SortingHelper.*;
 
@@ -13,12 +16,14 @@ public class PartitionSort {
     }
 
     public static <T extends Comparable<T>> void sort(T[] arr) {
-        partitionRecursion(arr, 0, arr.length - 1);
+        Random random = new Random();
+        partitionRecursion(arr, 0, arr.length - 1, random);
     }
 
-    public static <T extends Comparable<T>> void partitionRecursion(T[] arr, int l, int r) {
-        if (r - l <= 0) return;
+    public static <T extends Comparable<T>> void partitionRecursion(T[] arr, int l, int r, Random random) {
+        if (r <= l) return;
         int mid = l;
+        swap(arr, l, l + random.nextInt(r - l + 1));
         for (int i = l + 1; i <= r; i++) {
             if (arr[i].compareTo(arr[l]) < 0) {
                 mid++;
@@ -27,26 +32,66 @@ public class PartitionSort {
         }
         swap(arr, l, mid);
 
-        partitionRecursion(arr, l, mid - 1);
-        partitionRecursion(arr, mid + 1, r);
+        partitionRecursion(arr, l, mid - 1, random);
+        partitionRecursion(arr, mid + 1, r, random);
+
+    }
+
+    public static <T extends Comparable<T>> void sort2(T[] arr) {
+        partitionRecursion2(arr, 0, arr.length - 1);
+    }
+
+    public static <T extends Comparable<T>> void partitionRecursion2(T[] arr, int l, int r) {
+        if (r <= l) return;
+        int i = l + 1;
+        int j = r;
+        swap(arr, l, l + new Random().nextInt(r - l + 1));
+        while (true) {
+
+            while (i <= j && arr[i].compareTo(arr[l]) < 0)
+                i++;
+
+            while (j >= i && arr[j].compareTo(arr[l]) > 0)
+                j--;
+
+            if (i >= j) break;
+
+            swap(arr, i, j);
+            i++;
+            j--;
+        }
+
+        swap(arr, l, j);
+        partitionRecursion2(arr, l, j - 1);
+        partitionRecursion2(arr, j + 1, r);
 
     }
 
     public static <T extends Comparable<T>> void swap(T[] arr, int a, int b) {
-        T temp;
-        temp = arr[a];
+        T temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;
     }
 
     public static void main(String[] args) {
 
-        int[] size = {10000000};
+        int[] size = {100000};
         for (int s : size) {
             Integer[] arr = ArrayGenerator.generatorRandomArray(s, s);
-            Integer[] arr1 = Arrays.copyOf(arr, arr.length);
+            Integer[] arr2 = Arrays.copyOf(arr, arr.length);
             SortingHelper.sortTest(PARTITION_SORT, arr);
-            SortingHelper.sortTest(MERGE_SORT3, arr1);
+            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+
+            arr = ArrayGenerator.generatorSimpleLinearArray(s);
+            arr2 = Arrays.copyOf(arr, arr.length);
+            SortingHelper.sortTest(PARTITION_SORT, arr);
+            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+
+            arr = ArrayGenerator.generatorRandomArray(s, 1);
+            arr2 = Arrays.copyOf(arr, arr.length);
+//            SortingHelper.sortTest(PARTITION_SORT, arr);
+            SortingHelper.sortTest(PARTITION_DOUBLE_SORT, arr2);
+
         }
     }
 
