@@ -1,6 +1,6 @@
 package arrayLearn;
 
-import linear_search.LinearSearch;
+import serach.linear_search.LinearSearch;
 
 public class Array<T> {
 

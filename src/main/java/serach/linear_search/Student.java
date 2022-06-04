@@ -1,4 +1,4 @@
-package linear_search;
+package serach.linear_search;
 
 public class Student {
 
