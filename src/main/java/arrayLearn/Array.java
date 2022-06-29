@@ -18,6 +18,11 @@ public class Array<T> {
         this(DEFAULT_CAPACITY);
     }
 
+    public Array(T[] arr){
+        data = new Object[arr.length*2];
+        size = arr.length;
+        System.arraycopy(arr, 0, data, 0, arr.length);
+    }
     public int getSize() {
         return size;
     }
@@ -125,7 +130,14 @@ public class Array<T> {
         if (index != -1) remove(index);
     }
 
+    public void swap(int i,int j){
+        if (i<0 || i>= size || j < 0 || j>=size)
+            throw new IllegalArgumentException("索引异常");
 
+        Object temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+    }
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
